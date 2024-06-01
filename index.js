@@ -291,5 +291,3 @@ function sortObject(obj) {
   }
   return sorted;
 }
-
-export default app;
