@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const route = require("./src/route");
+// const route = require("./src/route");
 const moment = require("moment");
-const db = require("./src/config/db");
+// const db = require("./src/config/db");
 const dotenv = require("dotenv");
 dotenv.config();
 const methodOverride = require("method-override"); //để override sang method khác trong form
@@ -19,7 +19,11 @@ app.use(express.json());
 // Cho phép lấy ảnh từ file img
 app.use("/img", express.static("img"));
 //connetc to db
-db.connect();
+// db.connect();
+
+app.get("/", function (req, res) {
+  res.send("helo");
+});
 
 app.post("/sendMail", async (req, res, next) => {
   let html = "";
@@ -101,7 +105,7 @@ app.post("/sendMail", async (req, res, next) => {
   });
 });
 
-route(app);
+// route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
