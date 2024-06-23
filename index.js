@@ -73,15 +73,13 @@ app.post("/sendMail", async (req, res, next) => {
       td{
         padding: 10px 40px 10px 0;
       }
-      img.logo{
-        width:100px;
-      }
+     
     </style>
   </head>
   
   <body>
     <header>
-      <div><img class="logo" src="https://nganhangnhatro.vercel.app/assets/img/logoWeb.png" alt="Hosted bank"></div>
+      <div><img class="logo" src="https://firebasestorage.googleapis.com/v0/b/webbandongho-91eee.appspot.com/o/logo%2FlogoWeb.png?alt=media&token=142c07ad-f15c-4137-8be2-9e3d601c7d66" alt="Hosted bank"></div>
     </header>
      <div>
         <h4>Xin chào ${req.body.nameCustomer}, cảm ơn bạn đã đăng bài trên web site</h4>
@@ -153,15 +151,13 @@ app.post("/sendMailActiveAccount", async (req, res, next) => {
       td{
         padding: 10px 40px 10px 0;
       }
-      img.logo{
-        width:100px;
-      }
+     
     </style>
   </head>
   
   <body>
     <header>
-      <div><img class="logo" src="https://nganhangnhatro.vercel.app/assets/img/logoWeb.png" alt="Hosted bank"></div>
+      <div><img class="logo" src="https://firebasestorage.googleapis.com/v0/b/webbandongho-91eee.appspot.com/o/logo%2FlogoWeb.png?alt=media&token=142c07ad-f15c-4137-8be2-9e3d601c7d66" alt="Hosted bank"></div>
     </header>
      <div>
         <h4>Xin chào ${req.body.nameCustomer}, cảm ơn bạn đã đăng ký tài khoản trên website</h4>
