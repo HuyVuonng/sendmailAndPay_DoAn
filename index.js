@@ -181,6 +181,82 @@ app.post("/sendMailActiveAccount", async (req, res, next) => {
   });
 });
 
+app.post("/sendMailForgotPass", async (req, res, next) => {
+  let html = "";
+  console.log(req.body);
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "sendmailerservices@gmail.com",
+      pass: process.env.PassEmail,
+    },
+  });
+  const option = {
+    from: '"Hosted bank" <sendmailerservices@gmail.com>',
+    to: `${req.body.email}`,
+    subject: "Quên mật khẩu",
+    html: `<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quên mật khẩu</title>
+  
+  
+    <style type="text/css">
+      header {
+       
+        height: 20vh;
+      }
+  header div{
+    margin: 0 auto;
+    height: 100%;
+    width: fit-content;
+  }
+      header div img {
+        height: 100%;
+        object-fit: cover;
+      }
+      div {
+        margin: 0 auto;
+        width: fit-content;
+      }
+  
+      td{
+        padding: 10px 40px 10px 0;
+      }
+     
+    </style>
+  </head>
+  
+  <body>
+    <header>
+      <div><img class="logo" src="https://firebasestorage.googleapis.com/v0/b/webbandongho-91eee.appspot.com/o/logo%2FlogoWeb.png?alt=media&token=142c07ad-f15c-4137-8be2-9e3d601c7d66" alt="Hosted bank"></div>
+    </header>
+     <div>       
+      <div> <span>Vui lòng bấm </span><a href="${req.body.activeLink}"> vào đây</a> để thay đổi mật khẩu</div>
+       
+     </div>
+  </body>
+  
+  </html>
+    `,
+  };
+
+  transporter.sendMail(option, (err, infor) => {
+    if (err) {
+      console.log("error" + err);
+    } else {
+      console.log("send" + infor.response);
+      res.send("Gui tin thanh cong");
+    }
+  });
+});
+
 // route(app);
 
 app.listen(port, () => {
