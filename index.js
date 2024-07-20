@@ -413,14 +413,12 @@ app.get("/vnpay_ipn", function (req, res, next) {
           //paymentStatus = '2'
           // Ở đây cập nhật trạng thái giao dịch thanh toán thất bại vào CSDL của bạn
           res.status(200).json({ RspCode: "02", Message: "False" });
+        } else {
+          res.status(200).json({
+            RspCode: "02",
+            Message: "This order has been updated to the payment status",
+          });
         }
-
-        // else {
-        //   res.status(200).json({
-        //     RspCode: "02",
-        //     Message: "This order has been updated to the payment status",
-        //   });
-        // }
       } else {
         res.status(200).json({ RspCode: "04", Message: "Amount invalid" });
       }
