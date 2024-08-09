@@ -257,6 +257,82 @@ app.post("/sendMailForgotPass", async (req, res, next) => {
   });
 });
 
+app.post("/sendMailReport", async (req, res, next) => {
+  let html = "";
+  console.log(req.body);
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "sendmailerservices@gmail.com",
+      pass: process.env.PassEmail,
+    },
+  });
+  const option = {
+    from: '"Hosted bank" <sendmailerservices@gmail.com>',
+    to: `${req.body.email}`,
+    subject: "Thông báo báo cáo",
+    html: `<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo báo cáo</title>
+  
+  
+    <style type="text/css">
+      header {
+       
+        height: 20vh;
+      }
+  header div{
+    margin: 0 auto;
+    height: 100%;
+    width: fit-content;
+  }
+      header div img {
+        height: 100%;
+        object-fit: cover;
+      }
+      div {
+        margin: 0 auto;
+        width: fit-content;
+      }
+  
+      td{
+        padding: 10px 40px 10px 0;
+      }
+     
+    </style>
+  </head>
+  
+  <body>
+    <header>
+      <div><img class="logo" src="https://nganhangnhatro.vercel.app/assets/img/logoWeb.png" alt="Hosted bank"></div>
+    </header>
+     <div>
+      <h4>Xin chào ${req.body.email}</h4> 
+      <div><a href="${req.body.postLink}">Bài viết</a> <span> của bạn đã bị báo cáo với nội dung: "${req.body.contentReport}" và đã được quản trị viên xác nhận. Nếu có bất kỳ thắc mắc nào vui lòng liên hệ với quản trị viên qua email:</span><a href="mailto:admin.hostelbanking@gmail.com">admin.hostelbanking@gmail.com</a></div>
+     </div>
+  </body>
+  
+  </html>
+    `,
+  };
+
+  transporter.sendMail(option, (err, infor) => {
+    if (err) {
+      console.log("error" + err);
+    } else {
+      console.log("send" + infor.response);
+      res.send("Gui tin thanh cong");
+    }
+  });
+});
+
 // route(app);
 
 app.listen(port, () => {
