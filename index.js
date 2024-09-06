@@ -335,6 +335,13 @@ app.post("/sendMailReport", async (req, res, next) => {
 });
 
 app.get("/getMac", async function (req, res) {
+  console.log(
+    "address",
+    mac(function (err, addr) {
+      return addr; // '78:ca:39:b0:e6:7d'
+    })
+  );
+
   res.send(
     mac(function (err, addr) {
       return addr; // '78:ca:39:b0:e6:7d'
