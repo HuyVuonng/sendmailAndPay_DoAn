@@ -10,6 +10,7 @@ const methodOverride = require("method-override"); //để override sang method 
 const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
+const { address, mac } = require("address");
 
 app.use(cors());
 app.use(morgan("combined"));
@@ -333,6 +334,13 @@ app.post("/sendMailReport", async (req, res, next) => {
   });
 });
 
+app.get("/getMac", async function (req, res) {
+  res.send(
+    mac(function (err, addr) {
+      return addr; // '78:ca:39:b0:e6:7d'
+    })
+  );
+});
 // route(app);
 
 app.listen(port, () => {
